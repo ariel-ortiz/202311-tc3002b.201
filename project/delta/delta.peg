@@ -1,0 +1,4 @@
+expression_start = expression EOF
+expression = decimal / boolean
+decimal = r'\d+'
+boolean = 'true' / 'false'
