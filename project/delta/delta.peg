@@ -1,5 +1,7 @@
+comments = r'[/][/].*|[/][*](.|\n)*?[*][/]'
 expression_start = expression EOF
-expression = primary (('+' / '-') primary)*
+expression = multiplicative (('+' / '-') multiplicative)*
+multiplicative = primary (('*' / '/' / '%') primary)*
 primary = decimal / boolean
 decimal = r'\d+'
 boolean = 'true' / 'false'
