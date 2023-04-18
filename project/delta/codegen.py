@@ -53,3 +53,6 @@ class CodeGenerationVisitor(PTNodeVisitor):
         if children[0] == 'true':
             return '    i32.const 1\n'
         return '    i32.const 0\n'
+
+    def visit_parenthesis(self, node, children):
+        return children[0]
