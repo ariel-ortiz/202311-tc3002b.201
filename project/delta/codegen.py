@@ -72,3 +72,31 @@ class CodeGenerationVisitor(PTNodeVisitor):
                 case '!':
                     result += '    i32.eqz\n'
         return result
+
+    def visit_program_start(self, node, children):
+
+        def declare_wat_vars():
+            return ''.join([f'    (local ${v} i32)\n'
+                            for v in self.__symbol_table])
+
+        return CodeGenerationVisitor.WAT_TEMPLATE.format(
+            declare_wat_vars()
+            + ''.join(children)
+        )
+
+    def visit_statement(self, node, children):
+        return children[0]
+
+    def visit_declaration(self, node, children):
+        return ''
+
+    def visit_assignment(self, node, children):
+        return children[1] + children[0]
+
+    def visit_lhs_variable(self, node, children):
+        name = node.value
+        return f'    local.set ${name}\n'
+
+    def visit_rhs_variable(self, node, children):
+        name = node.value
+        return f'    local.get ${name}\n'
