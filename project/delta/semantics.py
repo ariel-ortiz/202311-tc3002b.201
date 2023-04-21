@@ -9,7 +9,7 @@ class SemanticMistake(Exception):
 
 class SemanticVisitor(PTNodeVisitor):
 
-    KEYWORDS = ['var', 'true', 'false']
+    KEYWORDS = ['var', 'true', 'false', 'if', 'else']
 
     def __init__(self, parser, **kwargs):
         super().__init__(**kwargs)

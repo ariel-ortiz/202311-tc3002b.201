@@ -100,3 +100,13 @@ class CodeGenerationVisitor(PTNodeVisitor):
     def visit_rhs_variable(self, node, children):
         name = node.value
         return f'    local.get ${name}\n'
+
+    def visit_block(self, node, children):
+        return ''.join(children)
+
+    def visit_if(self, node, children):
+        result = children[0] + '    if\n' + children[1] + '    else\n'
+        if len(children) == 3:
+            result += children[2]
+        result += '    end\n'
+        return result
